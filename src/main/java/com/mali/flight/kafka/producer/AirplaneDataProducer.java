@@ -17,4 +17,5 @@ public class AirplaneDataProducer {
         log.info("Publishing data to topic {} with data length of {} and timestamp of {}", topic, payload.getAirplaneStates().size(), payload.getTimeStamp());
         kafkaTemplate.send(topic, payload);
     }
+
 }

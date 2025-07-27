@@ -79,6 +79,7 @@ public class OpenSkyRestClient {
                 .header(HttpHeaders.AUTHORIZATION, getOrRefreshToken()).retrieve().bodyToMono(OpenSkyApiResponse.class)
                 .map(data -> {
                     AirplaneData res = new AirplaneData();
+                    log.info("Received response with {} states", data.getSourceStates().size());
                     if (data.getSourceStates() != null && !data.getSourceStates().isEmpty()) {
                         List<AirplaneState> mappedStates = data.getSourceStates().stream().map(MappingUtil::getAirplaneStates).toList();
                         res.setAirplaneStates(mappedStates);
