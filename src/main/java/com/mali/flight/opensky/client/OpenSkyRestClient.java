@@ -32,7 +32,7 @@ public class OpenSkyRestClient {
     @Value("${OPENSKY_CLIENT_SECRET}")
     private String clientSecret;
 
-    @Value("${OPENSKY_TOKEN_URI}")
+    @Value("${opensky.token.uri}")
     private String tokenURI;
 
     @Value("${opensky.api.baseurl}")
