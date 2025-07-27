@@ -1,5 +1,6 @@
 services:
   flight-service:
+    build: .
     image: spring-kafka-producer
     env_file:
       - .env
