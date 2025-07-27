@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.HOME_SERVER_USER }}
           key: ${{ secrets.HOME_SERVER_SSH_KEY }}
           script: |
-            cd /home/user/flight-service
+            cd /home/githubdeploy/flight-service
             echo "${{ secrets.ENV_FILE }}" > .env
             docker compose down
             docker compose build
