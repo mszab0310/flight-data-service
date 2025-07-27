@@ -18,6 +18,9 @@ public class FlightDataIngestionService {
     private final OpenSkyRestClient openSkyClient;
     private final AirplaneDataProducer kafkaProducer;
 
+    /**
+     * Polls the opensky API every 6 seconds and publishes it to the corresponding KAFKA topic
+     * */
     @Scheduled(fixedRate = 6000L)
     public void pollAndProduce() {
         AirplaneData data = openSkyClient.getAllAirplanes();
