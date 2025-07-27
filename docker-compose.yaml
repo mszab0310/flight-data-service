@@ -1,0 +1,7 @@
+services:
+  flight-service:
+    image: spring-kafka-producer
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"

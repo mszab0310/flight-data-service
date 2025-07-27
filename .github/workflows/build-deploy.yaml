@@ -1,0 +1,36 @@
+name: Deploy to Chronos
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Copy project files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOME_SERVER_IP }}
+          username: ${{ secrets.HOME_SERVER_USER }}
+          key: ${{ secrets.HOME_SERVER_SSH_KEY }}
+          source: "."
+          target: "/home/user/flight-service"
+
+      - name: SSH into server and deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOME_SERVER_IP }}
+          username: ${{ secrets.HOME_SERVER_USER }}
+          key: ${{ secrets.HOME_SERVER_SSH_KEY }}
+          script: |
+            cd /home/user/flight-service
+            echo "${{ secrets.ENV_FILE }}" > .env
+            docker compose down
+            docker compose build
+            docker compose up -d
